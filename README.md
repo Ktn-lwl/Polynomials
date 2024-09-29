@@ -1,6 +1,6 @@
 Polynomials!
 ---
-I want to do actually try using magic methods and operator overloading, so I've decided to make a useful tool for math classes: Code that makes working with polynomials easy(-ish) : )!
+I want to actually try using magic methods and operator overloading, so I've decided to make a useful tool for math classes: Code that makes working with polynomials easy(-ish) : )!
 
 Functionality
 ---
