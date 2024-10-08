@@ -18,5 +18,5 @@ To-Do
 ---
 - Add functionality for subtraction and __maybe__ division.
 
-[^1]: For the sake of this project, a Variable is a mathematical object of the form $x^n$ where "x" is a letter representing the mathematical variable, and n is its exponent .
+[^1]: For the sake of this project, a Variable is a mathematical object of the form x^n where "x" is a letter representing the mathematical variable, and n is its exponent .
 [^2]: For the sake of this project, a Term is mathematical object cmoposed of at least one of such variables mentioned above, and a coefficient. All Variables can be changed into terms, but for simplicity, I've decided to make it so that Terms can't be changed back to Variables. so before any operation is carried out, all objects involved are changed to Terms.
