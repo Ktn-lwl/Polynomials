@@ -1,13 +1,10 @@
-exponents = "⁰¹²³⁴⁵⁶⁷⁸⁹"
+exponents = {"-":"⁻", "0":"⁰", "1":"¹", "2":"²", "3":"³", "4":"⁴", "5":"⁵",
+             "6":"⁶", "7":"⁷", "8":"⁸", "9":"⁹"} 
 
 def superscript(exp: int):
-    if exp < 0:
-        ret = "⁻"
-        for i in str(exp)[1:]:
-            ret += exponents[int(i)]
-    else:
-        ret = ""
-        for i in str(exp):
-            ret += exponents[int(i)]
-    
+    ret = ""
+
+    for i in str(exp):
+        ret += exponents[i]
+
     return ret

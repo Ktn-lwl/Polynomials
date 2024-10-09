@@ -81,13 +81,14 @@ class Term:
             other = Term(variable = other)
 
         elif type(other) != Term:
-            #There's a chance I might implement expressions as a class, but that might be overkill
-            #For now, do nothing in this case ¯\_(ツ)_/¯ 
-            pass
+            raise TypeError(f"Can't add with '{type(other)}' object")
 
         if self.variables == other.variables:
             new_coeff = self.coeff + other.coeff
             return Term(coeff = new_coeff, var_list = get_vars(self.variables))
+        
+        else:
+            return Expression(self, other)
     
     def __mul__(self, other):
         if other == 0:
@@ -147,3 +148,44 @@ class Term:
 def get_vars(var_list: dict = None):
     return [Variable(v, var_list[v])  for v in var_list.keys()]
 
+class Expression:
+    def __init__(self, *terms : Term):
+        self.terms = terms
+
+    def __str__(self):
+        ret = ""
+        for term in self.terms:
+            if not ret:
+                ret += f"{str(term)} "
+            
+            elif term.coeff < 0:
+                ret += f"- {str(term)[1:]} "
+            else:
+                ret += f"+ {str(term)} "
+
+        return ret
+    
+    """
+    I've hit a bit of a block here. My knee jerk reaction is to use algorithms that
+    work on O(n²) time, and I have them ready to go. But some googling (regarding
+    polynomial expansion) tells me that it MIGHT be possible to cut down on that time 
+    to somewhere between linear and loglinear time.
+    I'm currently researching Fourier Transforms and Horner's method to this end.
+
+    In the mean time, here's some n² code:
+    """
+    
+    def __add__(self, other):
+        if type(other) == Expression:
+            new_terms = self.terms.copy()
+
+            
+    
+    def __mul__():
+        
+        pass
+
+c = Term([Variable("a", 3), Variable("y", 3)], coeff=7) #7a^3y^3
+a = Term(variable = Variable("e", 4), coeff = -4)
+
+print(Expression(*[a, c]))
