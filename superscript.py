@@ -4,6 +4,9 @@ exponents = {"-":"⁻", "0":"⁰", "1":"¹", "2":"²", "3":"³", "4":"⁴", "5":
 def superscript(exp: int):
     ret = ""
 
+    if exp == 1:
+        return ret
+    
     for i in str(exp):
         ret += exponents[i]
 
