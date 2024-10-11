@@ -44,8 +44,17 @@ class Term:
     def __add__(self, other):
         if type(other) == int and self.is_int():
             return Term(coeff = other + self.coeff)
+        
+        elif type(other) == int:
+            return Expression(self, Term(other))
 
-        elif type(other) != Term:
+        elif type(other) == Expression:
+            return Expression(self) + other
+        
+        elif type(other) == Term:
+            pass
+        
+        else:
             raise TypeError(f"Can't add with '{type(other)}' object")
 
         if self.variables == other.variables:
@@ -64,6 +73,9 @@ class Term:
             new_coeff = self.coeff * other
             
             return Term(new_coeff, *vars)
+        
+        elif type(other) == Expression:
+            return Expression(self) + other
 
         elif type(other) != Term:
             raise TypeError(f"Can't multiply Term object with '{type(other)}' object")
@@ -168,6 +180,7 @@ class Expression:
     
     def __mul__(self, other):
         res = Expression(*[])
+
         if type(other) == Term:
             other = Expression(other)
         elif type(other) == int:
