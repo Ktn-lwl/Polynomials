@@ -11,10 +11,11 @@ Definitions _(For the sake of this project...)_
 Functionality
 ---
 I plan on giving this program the ability to:
-1. [-] Add polynomials
-2. [-] Subtract polynomials
-3. [-] Multiply polynomials
-4. [-] Raise polynomials to the nth power (exponentiation)
+
+1. [x] Add polynomials
+2. [x] Subtract polynomials
+3. [x] Multiply polynomials
+4. [x] Raise polynomials to the nth power (exponentiation)
 5. [ ] Perform polynomial division
 
 Updates

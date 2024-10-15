@@ -52,6 +52,7 @@ class Term:
     def no_coeff_str(self):
         if self.is_int():
             return "0"
+        
         if self.coeff == -1:
             return Term.__str__(self, show_coeff = False)[1:]
         
