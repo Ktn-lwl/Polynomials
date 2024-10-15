@@ -106,13 +106,13 @@ class Term:
         new_coeff = self.coeff * other.coeff
         new_vars = self.variables.copy()
         
-        for i in other.variables.keys():
-            try:
+        for i in other.variables:
+            if i in new_vars:
                 new_vars[i] += other.variables[i]
-
-            except KeyError:
+            
+            else:
                 new_vars[i] = other.variables[i]
-        
+           
         new_vars = get_vars(new_vars)
         
         return Term(new_coeff, *new_vars)
@@ -155,13 +155,9 @@ class Expression:
     def __init__(self, *terms : Term):
         self.terms = dict([(terms[i].no_coeff_str(), terms[i]) for i in range(len(terms))])
 
-        try:
-            if self.terms["0"] == 0:
-                del self.terms["0"]
-        
-        except KeyError:
-            pass
-
+        if "0" in self.terms and self.terms["0"] == 0:
+            del self.terms["0"]
+       
     def __str__(self):
         if not self.terms:
             return "0"
@@ -195,13 +191,13 @@ class Expression:
         new_terms :dict = self.terms.copy()
 
         if type(other) == Expression:
-            for term in  other.terms.keys():
-                try:
+            for term in  other.terms:
+                if term in new_terms:
                     new_terms[term] = new_terms[term] + other.terms[term]
-                    
-                except KeyError:
-                    new_terms[term] = other.terms[term]
 
+                else:
+                    new_terms[term] = other.terms[term]
+                
             return Expression(*new_terms.values())
         
         elif type(other) == int:
