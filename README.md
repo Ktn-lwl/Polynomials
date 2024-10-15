@@ -10,22 +10,22 @@ Definitions _(For the sake of this project...)_
 
 Functionality
 ---
-I made this on a whim, so I'll probably add more functionality as I go along, but basically I want it to:
-
-1. [ ] Perform operations on and between polynomials.
+I plan on giving this program the ability to:
+1. [-] Add polynomials
+2. [-] Subtract polynomials
+3. [-] Multiply polynomials
+4. [-] Raise polynomials to the nth power (exponentiation)
+5. [ ] Perform polynomial division
 
 Updates
 ---
-##### Bug Fix
-- __Issue__: exponents equal to 1 still got displayed. It's not wrong, just odd to look at because math isn't usually written that way.
-- __Fix__: Variables to the 1th power now hide their exponent.
-##### Modularity
-- The cyclic dependency that existed between Terms and Variables has been removed at the expense of Variable's operability i.e Variables' ability to independently function in operations has been removed. 
-- The Variable class has been moved to its own file, Variable.py . Terms and objects are still somewhat cyclically dependent in the case of addition and so they exist together in Expression.py.
-##### New Class: Expressions
-- Expressions should be the highest level object I create. They are an aggregation of Terms, which are an aggregation of Variables.
-- Expressions currently support distributive multiplication, addition, and equality comparison with ints, Terms, and other Expressions.
+##### New Features: Subtraction and Exponentiation
+- Subtraction and Exponentiation can now be performed on Terms and Expressions. Exponentiation only works on non-negative integer powers
+##### Bug Fixes
+- __Issue__: Various program failures due to faulty logic in class initializers, particularly with respect to objects that could be said to equal 0 and with coefficients of -1.
+- __Fix__: Faulty initalizer logic updated.
 
 To-Do
 ---
-- Add functionality for subtraction and __maybe__ division.
+- Add functionality for Division.
+- I'm considering building a UI for this, because it's essentially a really dumb programming language in its current state.
