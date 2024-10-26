@@ -20,12 +20,32 @@ I plan on giving this program the ability to:
 
 Usage
 ---
-To create an expression like x² + 2xy + y² we first need to create the terms present, and to do that, for each term we use the syntax:
+The easiest way to create an expression is to make the composing variables. For instance, to create an expression like x² + 2xy + y² we can do so by initializing all the present (x and y) as Terms. Terms are initialized with the syntax:
 
-`Term(_coefficient_, Variable(_representing letter_, _exponent_), ...)`
+`Term(coefficient, Variable(representing_letter, exponent), ...)`
 
 where the ellipsis indicates additional terms and the exponent in each `Variable()` call can be omitted if equal to 1.
 
+To make a simple `x` and `y`, we can use the syntax:
+
+```
+x = Term(1, Variable("x"))
+y = Term(1, Variable("y"))
+```
+
+And to get our final expression, we could just treat our 'code' variables x and y like we normally would on paper:
+
+`result = x**2 + 2*x*y + y**2`
+
+Or better yet, since this _is_ an expansion calculator, we could just use the factored form: (x+y)²
+
+`result = (x + y)**2`
+
+The calculator also supports equality comparison, so `(x + y)**2 == x**2 + 2*x*y + y**2` will return `True`.
+
+---
+
+Alternatively, we could use the full syntax method:
 
 - x² can be initialized with the syntax: `Term(1, Variable("x", 2))`
 
@@ -41,14 +61,12 @@ NB: to get expression terms displayed in a particular order, they must be entere
 
 Updates
 ---
-##### New Features: Subtraction and Exponentiation
-- Subtraction and Exponentiation can now be performed on Terms and Expressions. Exponentiation only works on non-negative integer powers
-##### Bug Fixes
-- __Issue__: Various program failures due to faulty logic in class initializers, particularly with respect to objects that could be said to equal 0 and with coefficients of -1.
-- __Fix__: Faulty initalizer logic updated.
-##### Refactored code for pythonicness
+##### Issue: Usage info
+- The usage information I provided above was a bit too complicated.
+##### Fix
+- Described operation with simpler syntax.
 
 To-Do
 ---
 - Add functionality for Division.
-- I'm considering building a UI for this, because it's essentially a really dumb programming language in its current state.
+- Build a UI: I'm learning JavaScript and Django to help with this (might be a while).

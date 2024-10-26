@@ -215,14 +215,13 @@ class Expression:
     def __rsub__(self, other):
         return other + -1 * self
         
-    """
-    I've hit a bit of a block here. My knee jerk reaction is to use an algorithm that
-    works on O(n²) time (Ignoring the underlying logic), and I have one ready to go. But some googling (regarding
-    polynomial expansion) tells me that it MIGHT be possible to cut down on that time 
-    to somewhere between linear and loglinear time.
-    I'm currently researching Fourier Transforms and Horner's method to this end.
-    Here's the O(n²) code in the mean time:
-    """
+    #I've hit a bit of a block here. My knee jerk reaction is to use an algorithm that
+    #works on O(n²) time (Ignoring the underlying logic), and I have one ready to go. But
+    #some googling (regarding polynomial expansion) tells me that it MIGHT be possible to
+    #cut down on that time to somewhere between linear and loglinear time. I'm currently 
+    #researching Fourier Transforms and Horner's method to this end.
+    #Here's the O(n²) code in the mean time:
+    
     
     def __mul__(self, other):
         res = Expression(*[])

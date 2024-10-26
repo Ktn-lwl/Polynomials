@@ -4,9 +4,6 @@ class Variable:
     def __init__(self, name:str, exp: int = 1):
         self.name = name[0] #ensure that names are single characters only
         self.exp = exp
-
-    def is_int(self):
-        return self == 1
     
     def __str__(self):
         return f"{self.name}{superscript(self.exp)}"
