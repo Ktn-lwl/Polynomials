@@ -98,7 +98,7 @@ class Term:
             return Term(new_coeff, *vars)
         
         elif type(other) == Expression:
-            return Expression(self) + other
+            return Expression(self) * other
 
         elif type(other) != Term:
             raise TypeError(f"Can't multiply Term object with '{type(other)}' object")
@@ -259,3 +259,10 @@ class Expression:
     #ensure commutativity
     __radd__ = __add__
     __rmul__ = __mul__
+
+x = Term(1, Variable("x"))
+a = Term(1, Variable("a"))
+
+print(x*(x+a))
+print(x*(a+1))
+print((a+1)*x)

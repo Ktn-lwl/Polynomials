@@ -61,10 +61,8 @@ NB: to get expression terms displayed in a particular order, they must be entere
 
 Updates
 ---
-##### Issue: Usage info
-- The usage information I provided above was a bit too complicated.
-##### Fix
-- Described operation with simpler syntax.
+##### New Feature
+- Added support for in-place operations.
 
 To-Do
 ---
