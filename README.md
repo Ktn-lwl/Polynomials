@@ -61,10 +61,13 @@ NB: to get expression terms displayed in a particular order, they must be entere
 
 Updates
 ---
-##### New Feature
-- Added support for in-place operations.
+##### Bug fix:
+- __Issue__: The new in-place operations destroyed objects when used.
+- __Fix__: Fixed syntax of functions for in-place operations.
+
+- Laid groundwork for polynomial division.
 
 To-Do
 ---
 - Add functionality for Division.
-- Build a UI: I'm learning JavaScript and Django to help with this (might be a while).
+- Build a UI: I'm learning JavaScript and Flask to help with this (might be a while).

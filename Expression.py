@@ -1,5 +1,5 @@
 from Variable import *
-     
+
 class Term:
     def __init__(self, coeff: int, *var_list: Variable):
         self.coeff = coeff
@@ -16,6 +16,15 @@ class Term:
         for variable in variable_keys:
             if self.variables[variable] == 0:
                 del self.variables[variable]
+
+        self.multivariacy = self.is_multivariate()
+
+    #groundwork for division
+    def is_multivariate(self):
+        if self.is_int() or len(self.variables) < 2:
+            return False
+        
+        return True
 
     def is_int(self):
         return self == self.coeff
@@ -146,6 +155,19 @@ class Term:
         else:
             return False
         
+    #in place operations
+    def __iadd__(self, other):
+        return self + other
+    
+    def __isub__(self, other):
+        return self - other
+       
+    def __imul__(self, other):
+        return self * other
+
+    def __ipow__(self, other):
+        return self**other
+
     #ensure commutativity
     __rmul__ = __mul__ 
     __radd__ = __add__
@@ -157,7 +179,19 @@ class Expression:
 
         if "0" in self.terms and self.terms["0"] == 0:
             del self.terms["0"]
-       
+
+        self.multivariacy = self.is_multivariate()
+
+    def is_multivariate(self):
+        for term in self.terms:
+            if self.terms[term].is_multivariate():
+                return True
+        
+        if len(self.terms) > 2 or len(self.terms) == 2 and "0" not in self.terms:
+            return True
+            
+        return False
+
     def __str__(self):
         if not self.terms:
             return "0"
@@ -256,13 +290,19 @@ class Expression:
         else:
             return (pow(self, n//2) ** 2) * self
     
+    #in place operations
+    def __iadd__(self, other):
+        return self + other
+    
+    def __isub__(self, other):
+        return self - other
+       
+    def __imul__(self, other):
+        return self * other
+
+    def __ipow__(self, other):
+        return self**other
+
     #ensure commutativity
     __radd__ = __add__
     __rmul__ = __mul__
-
-x = Term(1, Variable("x"))
-a = Term(1, Variable("a"))
-
-print(x*(x+a))
-print(x*(a+1))
-print((a+1)*x)
