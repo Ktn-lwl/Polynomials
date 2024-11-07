@@ -1,4 +1,4 @@
-from  superscript import superscript
+from  logicky_bits.superscript import superscript
 
 class Variable:
     def __init__(self, name:str, exp: int = 1):

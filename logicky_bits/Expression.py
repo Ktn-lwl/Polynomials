@@ -1,4 +1,4 @@
-from Variable import *
+from logicky_bits.Variable import Variable, get_vars, superscript
 
 class Term:
     def __init__(self, coeff: int, *var_list: Variable):
@@ -51,9 +51,9 @@ class Term:
         else:
             ret = f"{self.coeff}"*show_coeff
 
-        for i in sorted(self.variables.keys()): 
+        for variable in sorted(self.variables.keys()): 
             #arranges variables in the term in alphabetical order for a standard look
-            ret += f"{i}{superscript(self.variables[i])}"
+            ret += f"{variable}{superscript(self.variables[variable])}"
 
         return ret
     
@@ -68,16 +68,16 @@ class Term:
         return Term.__str__(self, show_coeff = False)
 
     def __add__(self, other):
-        if type(other) == int and self.is_int():
+        if isinstance(other, int) and self.is_int():
             return Term(coeff = other + self.coeff)
         
-        elif type(other) == int:
+        elif isinstance(other, int):
             return Expression(self, Term(other))
 
-        elif type(other) == Expression:
+        elif isinstance(other, Expression):
             return Expression(self) + other
         
-        elif type(other) == Term:
+        elif isinstance(other, Term):
             pass
         
         else:
@@ -100,36 +100,36 @@ class Term:
         if other == 0:
             return 0
         
-        elif type(other) == int:
-            vars = get_vars(self.variables)
+        elif isinstance(other, int):
+            variables = get_vars(self.variables)
             new_coeff = self.coeff * other
             
-            return Term(new_coeff, *vars)
+            return Term(new_coeff, *variables)
         
-        elif type(other) == Expression:
+        elif isinstance(other, Expression):
             return Expression(self) * other
 
-        elif type(other) != Term:
-            raise TypeError(f"Can't multiply Term object with '{type(other)}' object")
+        elif not isinstance(other, Term):
+            raise TypeError(f"Can't multiply Term object with '{type(other)}' object = {other}")
 
         new_coeff = self.coeff * other.coeff
         new_vars = self.variables.copy()
         
-        for i in other.variables:
-            if i in new_vars:
-                new_vars[i] += other.variables[i]
+        for variable in other.variables:
+            if variable in new_vars:
+                new_vars[variable] += other.variables[variable]
             
             else:
-                new_vars[i] = other.variables[i]
+                new_vars[variable] = other.variables[variable]
            
         new_vars = get_vars(new_vars)
         
         return Term(new_coeff, *new_vars)
 
     def __pow__(self, n):
-        if n < 0:
-            #polynomials have powers greater than or equal to 0
-            return 0
+        if not isinstance(n, int) or n < 0:
+            return ("Invalid input. Polynomials only raise to non-negative integer powers."\
+            "Please read the documentation for usage info.")
         elif n == 0:
             return 1
         elif n == 1:
@@ -143,13 +143,13 @@ class Term:
             return (pow(self, n//2) ** 2) * self
         
     def __eq__(self, other):
-        if type(other) == Term:
+        if isinstance(other, Term):
             return self.variables == other.variables and self.coeff == other.coeff
         
-        elif type(other) == int and not self.variables:
+        elif isinstance(other, int) and not self.variables:
             return self.coeff == other
         
-        elif type(other) == int and self.variables:
+        elif isinstance(other, int) and self.variables:
             return False
         
         else:
@@ -209,13 +209,13 @@ class Expression:
         return ret[:-1] #remove the trailing space
     
     def __eq__(self, other):
-        if type(other) == int:
+        if isinstance(other, int):
             return Expression(Term(other)) == self
         
-        elif type(other) == Term:
+        elif isinstance(other, Term):
             return Expression(other) == self
         
-        elif type(other) == Expression:
+        elif isinstance(other, Expression):
             return self.terms == other.terms
 
         else:
@@ -224,7 +224,7 @@ class Expression:
     def __add__(self, other):
         new_terms :dict = self.terms.copy()
 
-        if type(other) == Expression:
+        if isinstance(other, Expression):
             for term in  other.terms:
                 if term in new_terms:
                     new_terms[term] = new_terms[term] + other.terms[term]
@@ -234,10 +234,10 @@ class Expression:
                 
             return Expression(*new_terms.values())
         
-        elif type(other) == int:
+        elif isinstance(other, int):
             return  self + Term(other)
 
-        elif type(other) == Term:
+        elif isinstance(other, Term):
             return self + Expression(other)
         
         else:
@@ -260,9 +260,9 @@ class Expression:
     def __mul__(self, other):
         res = Expression(*[])
 
-        if type(other) == Term:
+        if isinstance(other, Term):
             other = Expression(other)
-        elif type(other) == int:
+        elif isinstance(other, int):
             other = Expression(Term(other))
             
         for term in self.terms:
@@ -275,9 +275,9 @@ class Expression:
         return res
 
     def __pow__(self, n):
-        if n < 0:
-            #polynomials have powers greater than or equal to 0
-            return 0
+        if not isinstance(n, int) or n < 0:
+            return ("Invalid input. Polynomials only raise to non-negative integer powers."\
+            "Please read the documentation for usage info.")
         elif n == 0:
             return 1
         elif n == 1:

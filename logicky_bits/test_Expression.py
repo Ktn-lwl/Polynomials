@@ -1,5 +1,5 @@
 import unittest
-from Expression import *
+from logicky_bits.Expression import *
 
 
 E2a_3 = Expression(Term(2, Variable("a", 3)))
