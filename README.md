@@ -37,7 +37,7 @@ __Warnings__:
 
 - I don't reccommend making exponents too big (for obvious reasons). It works for most part, but for (expression)<sup>n</sup>, as n gets huge, it takes more runtime and you might get truncated output because of the insanely huge numbers generated.
 
-For a surface-level breakdown on how it works behind the scenes, check out the <a href="Alternative Documentation.md">Alternative Documentation</a>.
+For a surface-level breakdown on how it works behind the scenes, check out the <a href="logicky_bits/Alternative Documentation.md">Alternative Documentation</a>.
 
 Updates
 ---
