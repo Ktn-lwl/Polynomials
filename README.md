@@ -41,18 +41,18 @@ For a surface-level breakdown on how it works behind the scenes, check out the <
 
 Updates
 ---
-### Finally! A _proper_ interface!
-- I made a new file: calc.py that allows for an interactive session to expand polynomials provided user input is syntactically correct.
-
-### Reorganization
-- Oops! You might've noticed it looks awfully empty in the home directory. Don't worry, I just did some reorganizing; there's a new subdirectory where I keep the logic.
-
-### Refactoring
-- Fixed some weird variable names and rephrased some things.
+### QOL
+- Calculator window now displays initial problem statement along with output for reference.
+### Bugfix
+- __Issue__: In instances where there was a single missing closing parentheses at the end of user input, an internal variable was displayed along with the error message.
+- __Fix__: Offending code was removed. I jokingly call it a 'debug' instead of a bug because the only reason it was present was to help me debug :)
+### New Stuff
+- I plan on adding the option to save expressions and later substitute them into a new expresssion using special symbols. Some groundwork's been laid already.
 
 
 To-Do
 ---
 - Fix exponentiation regex.
+- Add functionality for substitution. 
 - Add functionality for Division.
 - Build a prettier UI: I'm learning JavaScript and Flask to help with this (might be a while).

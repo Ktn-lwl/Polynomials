@@ -6,10 +6,16 @@ from sys import exit
 letters = set(ascii_lowercase)
 nums = set(digits)
 op_set = {"+", "-", "*", "^"}
-parens = {")", "("}
+parens = {")", "("} 
+
+#edit zone
+subs = {"@":"", "#":"", "$":"", "&":""}
+#edit end
+
+error_msg = "Invalid input. Please check your input and read the documentation for usage info."
 
 def is_good_char(char):
-    return char in letters or char in op_set or char in parens or char in nums
+    return char in letters or char in op_set or char in parens or char in nums #`or char in subs.keys()
 
 def is_valid(problem):
     parenstack = 0
@@ -55,26 +61,50 @@ def is_valid(problem):
         index += 1
 
     if problem[-1] == ")" and parenstack != 1:
-        print(parenstack)
         return (False, problem)
 
     clean += problem[-1]
     return (True, clean)
 
+#edit zone
+def define_subs(sym):
+    print("Enter Expression for substitution")
+    expr = input(f"{sym} = ")
+    if is_valid(expr)[0]:
+        subs[sym] = expr[1]
+    else:
+        print(error_msg)
+        clear = input("Press Enter to clear:\n")
+        system("cls")
+    
+    main()
+#edit end
 
 def main():
     while True:
         variables = set()
-        problem = input("Input a Polynomial to expand or press Enter to exit:\n")
+
+        try:
+            problem = input("Input a Polynomial to expand or press Enter to exit:\n")
+        except EOFError:
+            print(error_msg)
+            continue
+
+        problem = problem.replace(" ", "")
 
         if not problem:
             exit()
+
+        #edit zone
+        elif len(problem) == 2 and problem[0] == "~" and problem[1] in subs:
+            define_subs(problem[1])
+        #edit end
 
         system("cls")
         validated = is_valid(problem)
 
         if not validated[0]:
-            print("Invalid input. Please check your input and read the documentation for usage info.")
+            print(error_msg)
 
         else:
             #create variables
@@ -83,6 +113,7 @@ def main():
                     exec(f'{char} = Term(1, Variable("{char}"))')
                     variables.add(char)
             
+            print(f"{problem} = ", end = "")
             exec(f"print({validated[1]})")
 
             for char in variables:
